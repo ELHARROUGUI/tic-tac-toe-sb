@@ -1,37 +1,34 @@
 import { useState } from "react";
 import "./styles.css";
 import Grid from "./components/Grid";
-import { calculateWinner } from "./utils/helpers";
+import { Game } from "./models/Game";
 
 export default function App() {
-  const [grid, setGrid] = useState(Array(9).fill(null));
-  const [playerX, setPlayerX] = useState(true);
-  const winner = calculateWinner(grid);
+  const [game, setGame] = useState(new Game());
+
   const onReset = () => {
-    setGrid(Array(9).fill(null));
-    setPlayerX(true);
+    setGame(new Game());
   };
 
-  const handleClick = (i) => {
-    const gridCopy = [...grid];
-    // If user click an occupied square or if game is won, return
-    if (winner || gridCopy[i]) return;
-    // Put an X or an O in the clicked square
-    gridCopy[i] = playerX ? "X" : "O";
-    setGrid(gridCopy);
-    setPlayerX(!playerX);
+  const handleSquareClick = (i) => {
+    const { player1, player2, grid, winner, activePlayer } = game;
+    if (winner || grid[i]) return;
+    const gameClone = new Game(player1, player2, grid);
+    gameClone.grid[i] = activePlayer.jeton;
+    gameClone.switchActivePlayer();
+    setGame(gameClone);
   };
 
   return (
     <div className="App">
       <h1>TIC-TAC-TOE</h1>
       <p>multi-player, multi-type, multi-fun</p>
-      <Grid squares={grid} onClick={handleClick} />
+      <Grid squares={game.grid} onClick={handleSquareClick} />
       <div>
         <p>
-          {winner
-            ? "Winner: " + winner
-            : "Next Player: " + (playerX ? "X" : "O")}
+          {game.winner
+            ? "Winner: " + game.winner.name
+            : "Next Player: " + game.activePlayer.name}
         </p>
         <button onClick={onReset}>reset</button>
       </div>
