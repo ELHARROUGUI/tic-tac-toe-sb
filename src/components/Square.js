@@ -1,17 +1,25 @@
-const style = {
-  background: "lightblue",
-  border: "2px solid darkblue",
+import { Jeton } from "../models/Player";
+import PropTypes from "prop-types";
+
+const style = (color) => ({
+  color,
+  background: "white",
+  border: "2px solid black",
   fontSize: "30px",
   fontWeight: "800",
   cursor: "pointer",
   outline: "none"
-};
+});
 
-//need valid props
-const Square = ({ value, onClick }) => (
-  <button style={style} onClick={onClick}>
-    {value}
+const Square = ({ jeton: { sign, color }, onClick }) => (
+  <button style={style(color)} onClick={onClick}>
+    {sign}
   </button>
 );
+
+Square.propTypes = {
+  jeton: PropTypes.instanceOf(Jeton),
+  onClick: PropTypes.func
+};
 
 export default Square;

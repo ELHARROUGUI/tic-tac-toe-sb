@@ -1,7 +1,9 @@
 import Square from "./Square";
+import { Jeton } from "../models/Player";
+import PropTypes from "prop-types";
 
 const style = {
-  border: "4px solid darkblue",
+  border: "none",
   borderRadius: "10px",
   width: "250px",
   height: "250px",
@@ -10,13 +12,19 @@ const style = {
   gridTemplate: "repeat(3, 1fr) / repeat(3, 1fr)"
 };
 
-//need valid props
-const Grid = ({ squares, onClick }) => (
-  <div style={style}>
-    {squares.map((square, i) => (
-      <Square key={i} value={square} onClick={() => onClick(i)} />
-    ))}
-  </div>
-);
+const Grid = ({ grid, onClick }) => {
+  return (
+    <div style={style}>
+      {grid.map((jeton, i) => (
+        <Square key={i} jeton={jeton} onClick={() => onClick(i)} />
+      ))}
+    </div>
+  );
+};
+
+Grid.propTypes = {
+  grid: PropTypes.arrayOf(PropTypes.instanceOf(Jeton)),
+  onClick: PropTypes.func
+};
 
 export default Grid;

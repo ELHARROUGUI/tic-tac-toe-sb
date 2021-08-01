@@ -12,7 +12,8 @@ export default function App() {
 
   const handleSquareClick = (i) => {
     const { player1, player2, grid, winner, activePlayer } = game;
-    if (winner || grid[i]) return;
+    if (winner || grid[i].sign) return;
+
     const gameClone = new Game(player1, player2, grid);
     gameClone.grid[i] = activePlayer.jeton;
     gameClone.switchActivePlayer();
@@ -23,7 +24,7 @@ export default function App() {
     <div className="App">
       <h1>TIC-TAC-TOE</h1>
       <p>multi-player, multi-type, multi-fun</p>
-      <Grid squares={game.grid} onClick={handleSquareClick} />
+      <Grid grid={game.grid} onClick={handleSquareClick} />
       <div>
         <p>
           {game.winner

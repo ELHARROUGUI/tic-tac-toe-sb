@@ -1,12 +1,17 @@
-import { Player } from "./Player";
+import { Player, Jeton } from "./Player";
 
 export class Game {
   constructor(player1, player2, grid) {
     if (player1 === undefined || player2 === undefined || grid === undefined) {
       console.log("constructor1");
-      this.player1 = new Player("Player 1", 0, "X", true);
-      this.player2 = new Player("Player 2", 0, "O", false);
-      this.grid = Array(9).fill(null);
+      this.player1 = new Player("Player 1", 0, new Jeton("X", "red"), true);
+      this.player2 = new Player(
+        "Player 2",
+        0,
+        new Jeton("O", "darkblue"),
+        false
+      );
+      this.grid = Array(9).fill(new Jeton(null, null));
     } else {
       console.log("constructor1");
       this.player1 = player1;
@@ -37,7 +42,7 @@ export class Game {
     for (let i = 0; i < winnerCombinaisions.length; i++) {
       const [a, b, c] = winnerCombinaisions[i];
       if (
-        this.grid[a] &&
+        this.grid[a].sign &&
         this.grid[a] === this.grid[b] &&
         this.grid[a] === this.grid[c]
       ) {
