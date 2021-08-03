@@ -1,4 +1,13 @@
+/* Google font */
+@import url("https://fonts.googleapis.com/css?family=Dancing+Script");
+
 .App {
-  font-family: sans-serif;
   text-align: center;
+  font-family: "Dancing Script", cursive;
+  font-size: 19px;
+  letter-spacing: 1px;
+  word-spacing: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 100%;
+  background-image: repeating-linear-gradient(white 0px, white 24px, teal 25px);
 }

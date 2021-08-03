@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 
 const style = (color) => ({
   color,
-  background: "white",
+  background: "none",
   border: "2px solid black",
   fontSize: "30px",
   fontWeight: "800",
+  fontFamily: "Dancing Script",
   cursor: "pointer",
   outline: "none"
 });
